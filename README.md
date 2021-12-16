@@ -73,19 +73,16 @@ routines (like changing local logging configurations), or other installing
 ### Usage
 After logging into your Infocyte instance (with an administrator role) simply navigate to `Admin->Extensions`.
 
-You can copy and paste an extension from this repository (check the
-[contrib folder](/contrib) for submitted extensions), or start from scratch
-and write your own.
+Infocyte default extensions are automatically loaded/updated but start in the disabled state.  Enable the 
+extensions (by marking it "Active") you wish to use or your can create your own by copying one of the 
+default extensions or starting from scratch.
 
-Hitting save will perform a syntax validation and if everything checks out, will
-save the newly created extension for use. To make the extension available to
-deploy during a scan, make sure you click the `Active` column to enable it as an
-option.
+Hitting save on a new or edited extension will perform a syntax validation and if everything checks out, will
+save the newly created extension for use. To make the extension available to deploy during a scan, 
+make sure you click the `Active` column to enable it as an option.
 
 Once an extension is created and activated, it can be chosen for execution during a scan of a target group.
 
-*Note: The roadmap has us separating action extensions into their own workflow
-within the interface.*
 
 ### API Reference
 Below is documentation surrounding the extended Lua API developed and provided
@@ -613,8 +610,9 @@ hunt.log("My first HUNT extension!")
 Infocyte welcomes any contributions to this repository. The preferred method is
 to
 [open a pull request](https://help.github.com/en/articles/about-pull-requests)
-with a description of the incoming extension. The extension will undergo a
-code review before being merged.
+with a description of the change. 
+
+If you would like to collaborate on an extension, reach out to Infocyte support and you will be connected to someone that will work with you on it.
 
 ### Feature Requests
 If there is a feature you would like seen added to the extension system, feel
