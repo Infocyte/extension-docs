@@ -10,7 +10,7 @@ into the Infocyte platform.
 - [Infocyte Extensions](#infocyte-extensions)
     - [Overview](#overview)
         - [Collection](#collection)
-        - [Action](#action)
+        - [Response](#response)
     - [Usage](#usage)
     - [API Reference](#api-reference)
       - [Logging and Output](#logging-and-output)
@@ -54,7 +54,7 @@ by the platform's standard host collection routine. Examples also exist to call
 other types of scripts like Powershell, Python or Bash depending on availability
 of the relevant interpreter on the host.
 
-There are currently two types of extensions supported: Collection & Action.
+There are currently two types of extensions supported: Collection & Response.
 
 ##### Collection
 Collection extensions extend what is collected or inspected at scan time. This
@@ -64,8 +64,8 @@ text fields are available for arbitrary data collection up to 3MB in size. For
 large evidence collection, we will have functions available to push data direct
 from the host to a user provided AWS S3 Bucket, sFTP, or SMB share.
 
-##### Action
-Action Extensions cause direct changes to remote systems. These can be
+##### Response
+Response Extensions cause direct changes to remote systems. These can be
 remediation actions like host isolation, malware killing, host hardening
 routines (like changing local logging configurations), or other installing
 3rd party tools.
@@ -91,7 +91,7 @@ by Infocyte. This API can be broken down into various parts:
 - [Infocyte Extensions](#infocyte-extensions)
     - [Overview](#overview)
         - [Collection](#collection)
-        - [Action](#action)
+        - [Response](#response)
     - [Usage](#usage)
     - [API Reference](#api-reference)
       - [Logging and Output](#logging-and-output)
