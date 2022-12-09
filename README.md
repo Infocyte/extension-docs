@@ -1,9 +1,8 @@
 # Infocyte Extensions
-The [Infocyte](https://www.infocyte.com) platform is an agentless Threat Hunting
-and Incident Response platform. In addition to the plethora of native host data
-collection and analysis provided by default, users are able to define their own
-collections and response actions to be performed on endpoints and servers. Here
-you will find examples and contributed extensions which can be easily loaded
+[Infocyte](https://www.infocyte.com) is an Endpoint Detection and Response (EDR) platform. 
+In addition to the plethora of native host data collection and analysis provided by default, 
+users are able to define their own collections and response actions to be performed on endpoints and servers. 
+Here you will find examples and contributed extensions which can be easily loaded
 into the Infocyte platform.
 
 **This repo contains:**
@@ -36,7 +35,7 @@ into the Infocyte platform.
     - [Learn lua](#learn-lua)
 
 ### Overview
-The Infocyte extension system is built on top of [Lua 5.3](https://www.lua.org),
+Our extension system is built on top of [Lua 5.3](https://www.lua.org),
 which provides an easy to deploy, cross platform, and feature-rich library of
 built-in functions. This includes file system, string , I/O, math, operations
 (among others). Refer to the
@@ -44,8 +43,8 @@ built-in functions. This includes file system, string , I/O, math, operations
 detailed documentation on usage or you can click [here](#learn-lua) for Lua
 tutorials.
 
-In addition to the Lua standard library, Infocyte exposes capabilities
-of its' agent and endpoint collector ("Survey") that make interacting with host
+In addition to the Lua standard library, Infocyte exposes direct function calls 
+and capabilities of its' agent that make interacting with the host
 operating systems more powerful and convenient. This extended language is the
 real engine that powers the extension system. With these enhancements, extension
 authors can easily perform web requests, access the windows registry, terminate
@@ -605,14 +604,6 @@ hunt.install_agent("server_key")
 ```lua
 hunt.log("My first HUNT extension!")
 ```
-
-### Contributing
-Infocyte welcomes any contributions to this repository. The preferred method is
-to
-[open a pull request](https://help.github.com/en/articles/about-pull-requests)
-with a description of the change. 
-
-If you would like to collaborate on an extension, reach out to Infocyte support and you will be connected to someone that will work with you on it.
 
 ### Feature Requests
 If there is a feature you would like seen added to the extension system, feel
