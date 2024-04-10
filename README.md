@@ -22,6 +22,7 @@ into the Infocyte platform.
       - [Process](#process)
       - [Registry](#registry)
       - [Hashing](#hashing)
+      - [Response](#response-1)
       - [Recovery](#recovery)
       - [Analysis](#analysis)
         - [Autostarts](#autostarts)
@@ -30,7 +31,6 @@ into the Infocyte platform.
       - [Status](#status)
       - [Extras](#extras)
     - [Examples](#examples)
-    - [Contributing](#contributing)
     - [Feature Requests](#feature-requests)
     - [Learn lua](#learn-lua)
 
@@ -103,6 +103,7 @@ by Infocyte. This API can be broken down into various parts:
       - [Process](#process)
       - [Registry](#registry)
       - [Hashing](#hashing)
+      - [Response](#response-1)
       - [Recovery](#recovery)
       - [Analysis](#analysis)
         - [Autostarts](#autostarts)
@@ -111,7 +112,6 @@ by Infocyte. This API can be broken down into various parts:
       - [Status](#status)
       - [Extras](#extras)
     - [Examples](#examples)
-    - [Contributing](#contributing)
     - [Feature Requests](#feature-requests)
     - [Learn lua](#learn-lua)
 
@@ -153,6 +153,7 @@ hunt.log("Domain: " .. host_info:domain())
 | **hunt.env.has_python3()** | Returns a boolean indicating if Python 3 is available on the system. |
 | **hunt.env.has_powershell()** | Returns a boolean indicating if Powershell is available on the system. |
 | **hunt.env.has_sh()** | Returns a boolean indicating if the bourne shell is available on the system. |
+| **hunt.env.tempdir()** | Platform agnostic way to get a temporary directory. Returns a string path. |
 
 #### Shell Commands
 
@@ -276,12 +277,20 @@ outpath = "C:\\windows\\notepad.exe.zip"
 hunt.gzip(temppath, outpath, nil)
 ```
 
+```lua
+-- Parse CSV string output
+str_csv = hunt.env.run_powershell("get-process | select id, name, path, commandline | convertto-csv -NoTypeInformation")
+csv = hunt.csv.parse(str_csv)
+hunt.print_table(csv)
+```
+
 | Function | Description |
 | --- | --- |
 | **hunt.gzip(from: string, to: string, level: int)** | Compresses `from` into an archive `to`, level is optional (0-9) |
 | **hunt.base64(data: bytes)** | Takes a `table` of bytes and returns a base64 encoded `string`. |
 | **hunt.unbase64(data: string)** | Takes a base64 encoded `string` and returns a `table` of bytes. |
 | **hunt.bytes_to_string(data: bytes)** | Takes a `table` of bytes and returns a `string`. |
+| **hunt.csv.parse(csv: string)** | Parses a string representation of a csv (such as those returned by powershell) and outputs a group of objects. |  
 
 #### Network
 
@@ -355,6 +364,7 @@ data = client:download_string()
 procs = hunt.process.list()
 for _, proc in pairs(procs) do
     hunt.log("Found pid " .. proc:pid() " .. " @ " .. proc:path())
+    hunt.log("- Name: " .. proc:name())
     hunt.log("- Owned by: " .. proc:owner())
     hunt.log("- Started by: " .. proc:ppid())
     hunt.log("- Command Line: " .. proc:cmd_line())
@@ -373,6 +383,9 @@ end
 | **hunt.process.kill_pid(pid: number)** | Ends the process identified by `pid` |
 | **hunt.process.kill_process(name: string)** | Ends any process with `name` |
 | **hunt.process.list()** | Returns a list of processes found running |
+| **hunt.process.get_process(name: string)** | Look up process by `name` |
+| **hunt.process.get_process(pid: number)** | Look up process by `pid` |
+
 
 
 #### Registry
@@ -449,6 +462,20 @@ hunt.log(f"hashed: ${hash})
 | **hunt.hash.fuzzy(path: string)** | Returns the string hash of the file |
 | **hunt.hash.fuzzy_data(data)** | Returns the string hash of a data blob |
 
+
+#### Response
+
+```lua
+-- 
+
+```
+
+| Function | Description |
+| --- | --- |
+| **hunt.response.quarantine(path: string)** | Neuter file by path with XOR encryption or similar. Store locally with metadata appended to file format (header?) |
+| **hunt.response.unquarantine(path: string)** | Unneuter a file that was quarantined and return to where it was |
+
+
 #### Recovery
 
 ```lua
@@ -463,10 +490,17 @@ recovery = hunt.recovery.s3(nil, nil, 'us-east-2', 'my-bucket')
 recovery:upload_file('c:\\windows\\system32\\notepad.exe', 'evidence.bin')
 ```
 
+```lua
+-- Upload file to Datto EDR
+link = hunt.recovery.upload('c:\\windows\\system32\\notepad.exe')
+hunt.log(link)
+```
+
 | Function | Description |
 | --- | --- |
-| **hunt.recovery.s3(access_key_id: string, secret_access_key: string, region: string, bucket: string)** | S3 recovery client. |
-| **upload_file(local: string, remote: string)** | Upload a local file to remote path |
+| **hunt.recover.upload()** | Upload a local file to Datto EDR provisioned storage |
+| **hunt.recovery.s3(access_key_id: string, secret_access_key: string, region: string, bucket: string)** | User defined S3 recovery client. |
+| **upload_file(local: string, remote: string)** | Upload a local file to a user defined remote path |
 
 
 #### Analysis
