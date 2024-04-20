@@ -250,7 +250,7 @@ file:is_file() -- returns if the item is a non-directory file
 | Function | Description |
 | --- | --- |
 | **hunt.fs.ls(path, [path2], [pathn], [opt])** | Takes one or more paths and returns a list of files. |
-| **hunt.path_exists(path)** | Returns a `boolean` if a path exists or not |
+| **hunt.fs.path_exists(path)** | Returns a `boolean` if a path exists or not |
 | **hunt.fs.ls_stream()** | TBD |
 | **hunt.fs.is_file(path)** | Returns a `boolean` if the path is a file (not a directory) |
 | **hunt.csv.open(path)** | Opens a CSV file and reads it into a lua `table`. |
