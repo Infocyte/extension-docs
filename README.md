@@ -610,9 +610,9 @@ hunt.survey.add(a)
 | **autostart:params(string)** | *Optional:* Sets the parameters of executed file |
 | **autostart:type(string)** | Sets the custom *type* of artifact |
 | **autostart:location(string)** | Where the autostart was located (config file, registry path, etc) [REQUIRED] |
-| **artifact:md5(string)** | *Optional:* Sets md5 for file explicitly, otherwise will attempt to hash file if present |
-| **artifact:sha1(string)** | *Optional:* Sets sha1 for file explicitly, otherwise will attempt to hash file if present |
-| **artifact:sha256(string)** | *Optional:* Sets sha256 for file explicitly, otherwise will attempt to hash file if present |
+| **autostart:md5(string)** | *Optional:* Sets md5 for file explicitly, otherwise will attempt to hash file if present |
+| **autostart:sha1(string)** | *Optional:* Sets sha1 for file explicitly, otherwise will attempt to hash file if present |
+| **autostart:sha256(string)** | *Optional:* Sets sha256 for file explicitly, otherwise will attempt to hash file if present |
 
 ##### Add Artifacts
 | Function | Description |
